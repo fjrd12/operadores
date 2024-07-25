@@ -1,0 +1,24 @@
+FUNCTION Z_TR_CAJA_OPER_CALL_TRAN.
+*"--------------------------------------------------------------------
+*"*"Interfase local
+*"  IMPORTING
+*"     REFERENCE(BELNR) TYPE  BELNR_D
+*"     REFERENCE(BUKRS) TYPE  BUKRS
+*"     REFERENCE(GJAHR) TYPE  GJAHR
+*"--------------------------------------------------------------------
+
+* ->constantes
+  CONSTANTS: c_e TYPE c LENGTH 1  VALUE 'E'.
+
+  IF BELNR IS NOT INITIAL AND BUKRS IS NOT INITIAL AND GJAHR IS NOT INITIAL.
+
+    SET PARAMETER ID 'BLN'  FIELD BELNR.
+    SET PARAMETER ID 'BUK'  FIELD BUKRS.
+    SET PARAMETER ID 'GJR'  FIELD GJAHR.
+    CALL TRANSACTION 'FB03' AND SKIP FIRST SCREEN.
+  ELSE.
+    MESSAGE e001(ZFIMONI_FACTOR) DISPLAY LIKE c_e.
+  ENDIF.
+
+
+ENDFUNCTION.

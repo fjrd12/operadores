@@ -1,0 +1,559 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>Application interface caja operadores</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZ_TR_CAJA_OPER_APITOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZ_TR_CAJA_OPER_API</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>ZTR_CAJ_OPE_ALV_POP_UP_POS</FUNCNAME>
+     <SHORT_TEXT>Muestra ALV Popup</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>I_START_COLUMN</PARAMETER>
+       <DEFAULT>25</DEFAULT>
+       <REFERENCE>X</REFERENCE>
+       <TYP>I</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_START_LINE</PARAMETER>
+       <DEFAULT>6</DEFAULT>
+       <REFERENCE>X</REFERENCE>
+       <TYP>I</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_END_COLUMN</PARAMETER>
+       <DEFAULT>100</DEFAULT>
+       <REFERENCE>X</REFERENCE>
+       <TYP>I</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_END_LINE</PARAMETER>
+       <DEFAULT>10</DEFAULT>
+       <REFERENCE>X</REFERENCE>
+       <TYP>I</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_TITLE</PARAMETER>
+       <DEFAULT>&apos;ALV&apos;</DEFAULT>
+       <REFERENCE>X</REFERENCE>
+       <TYP>STRING</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>I_POPUP</PARAMETER>
+       <DEFAULT>&apos;&apos;</DEFAULT>
+       <REFERENCE>X</REFERENCE>
+       <TYP>FLAG</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>IT_ALV</PARAMETER>
+       <DBSTRUCT>ZTR_COPER_POS</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>I_START_COLUMN</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_START_LINE</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_END_COLUMN</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_END_LINE</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_TITLE</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>I_POPUP</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Indicador general</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_ALV</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Posición de operación caja operadores</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_CALL_TRAN</FUNCNAME>
+     <SHORT_TEXT>Call Transaction to FB03</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>BELNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BELNR_D</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>BUKRS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BUKRS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>GJAHR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>GJAHR</TYP>
+      </RSIMP>
+     </IMPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>BELNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Número de un documento contable</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>BUKRS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Sociedad</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>GJAHR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ejercicio</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_CREATE_RETRY</FUNCNAME>
+     <SHORT_TEXT>Logica de retry</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>TS_COPER_HEADER</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZES_COPER_HEADER</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>EXT_RETURN</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>TS_COPER_HEADER</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Estructura de ZES_COPER_HEADER</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EXT_RETURN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Parámetro de retorno</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_DEBUG</FUNCNAME>
+     <SHORT_TEXT>Activate debug operadors</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>NAME</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>RVARI_VNAM</TYP>
+      </RSIMP>
+     </IMPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>NAME</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>ABA: Nombre de variables en variante</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_DISPLAY_LOG</FUNCNAME>
+     <SHORT_TEXT>Mostrar log de operación</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>UUID</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>CHAR128</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>LOG_NOT_FOUND</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>UUID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>128 caracteres</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>LOG_NOT_FOUND</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Log no encontrado dado el UUID</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_DISPLAY_POSI</FUNCNAME>
+     <SHORT_TEXT>Mostrar alv posiciones</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>UUID</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>CHAR128</TYP>
+      </RSIMP>
+     </IMPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>UUID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>128 caracteres</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_EXIT_PAY</FUNCNAME>
+     <SHORT_TEXT>Exit caja operadores</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>REGUH_DATA</PARAMETER>
+       <DBFIELD>REGUH</DBFIELD>
+       <REFERENCE>X</REFERENCE>
+      </RSIMP>
+     </IMPORT>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>PROC_ERROR</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>ERROR_IN_IDOC_CONTROL</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>ERROR_WRITING_IDOC_STATUS</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>ERROR_IN_IDOC_DATA</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>SENDING_LOGICAL_SYSTEM_UNKNOWN</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>OTHERS</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>REGUH_DATA</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Datos de pago del programa de pagos</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PROC_ERROR</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error Message Set</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ERROR_IN_IDOC_CONTROL</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Incorrect entry in IDoc control record</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ERROR_WRITING_IDOC_STATUS</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error when writing IDoc status records</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ERROR_IN_IDOC_DATA</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Incorrect entry in IDoc data records</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>SENDING_LOGICAL_SYSTEM_UNKNOWN</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Own logical system unknown</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>OTHERS</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Others errors</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_EXIT_PAYM</FUNCNAME>
+     <SHORT_TEXT>Payment medium exit</SHORT_TEXT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>T_LINES</PARAMETER>
+       <DBSTRUCT>FPM_FILE</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>IT_BAPIRET2</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>ERROR_IN_IDOC_CONTROL</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>ERROR_WRITING_IDOC_STATUS</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>ERROR_IN_IDOC_DATA</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>SENDING_LOGICAL_SYSTEM_UNKNOWN</EXCEPTION>
+      </RSEXC>
+      <RSEXC>
+       <EXCEPTION>OTHERS</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>T_LINES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Estructura de transferencia de contenido de una línea</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IT_BAPIRET2</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Parámetro de retorno</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ERROR_IN_IDOC_CONTROL</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Incorrect entry in IDoc control record</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ERROR_WRITING_IDOC_STATUS</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error when writing IDoc status records</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ERROR_IN_IDOC_DATA</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Incorrect entry in IDoc data records</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>SENDING_LOGICAL_SYSTEM_UNKNOWN</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Own logical system unknown</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>OTHERS</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Others errors</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_RECORD_CALL</FUNCNAME>
+     <SHORT_TEXT>Guarda el llamado de la interfaz de operadores</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>ZFIES_PAYLIQADV</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZFIES_PAYLIQADV</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>UUID</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>CHAR128</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>ZFIES_IMITPOSITION</PARAMETER>
+       <DBSTRUCT>ZFIES_IMITPOSITION</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>ZFIES_EX_IT_RETURN</PARAMETER>
+       <DBSTRUCT>ZFIES_EX_IT_RETURN</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>ERROR_SAVING_DATA</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>ZFIES_PAYLIQADV</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Estructura PayLiqADV para Poliza Contable</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>UUID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>128 caracteres</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ZFIES_IMITPOSITION</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Estructura de ImItPosition para Poliza Contable</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ZFIES_EX_IT_RETURN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Estructura para Mensajes Poliza Contable</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ERROR_SAVING_DATA</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Error saving to the trace</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_SCENARIO</FUNCNAME>
+     <SHORT_TEXT>Determinar el escenario de la propuesta</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>LAUFD</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>LAUFD</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>LAUFI</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>LAUFI</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>SCENARIO</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>CHAR10</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>ORIG_LAUFD</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>LAUFD</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>ORIG_LAUFI</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>LAUFI</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>LAUFD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Fecha en la que debe ejecutarse el programa</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>LAUFI</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Característica de identificación adicional</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>SCENARIO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Campo de texto, longitud 10</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ORIG_LAUFD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Fecha en la que debe ejecutarse el programa</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ORIG_LAUFI</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Característica de identificación adicional</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_SCENARIO_ORIG</FUNCNAME>
+     <SHORT_TEXT>Determinar el escenario de la propuesta</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>LAUFD</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>LAUFD</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>LAUFI</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>LAUFI</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>SCENARIO</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>CHAR10</TYP>
+      </RSEXP>
+     </EXPORT>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>NOT_FOUND</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>LAUFD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Fecha en la que debe ejecutarse el programa</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>LAUFI</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Característica de identificación adicional</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>SCENARIO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Campo de texto, longitud 10</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>NOT_FOUND</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>Not Found</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_STORE_INDEX</FUNCNAME>
+     <SHORT_TEXT>Store payment proposal index</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>LAUFD</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>LAUFD</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>LAUFI</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>LAUFI</TYP>
+      </RSIMP>
+     </IMPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>LAUFD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Fecha en la que debe ejecutarse el programa</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>LAUFI</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Característica de identificación adicional</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>
