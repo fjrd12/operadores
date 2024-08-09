@@ -40,6 +40,7 @@ FUNCTION Z_TR_CAJA_OPER_EXIT_PAYM.
         TZTRPAYH          type STANDARD TABLE OF ZTRPAYH,
         TZTRPAYP          type STANDARD TABLE OF ZTRPAYP,
         TZTRPAY_META      type STANDARD TABLE OF ZTRPAY_META,
+        TZTRPAY_METAP     TYPE STANDARD TABLE OF ZTRPAY_METAP,
         EDIDC             type EDIDC,
         ZBNKHEADER        type ZBNKHEADER,
         lv_lifnr          TYPE lifnr,
@@ -583,7 +584,8 @@ FUNCTION Z_TR_CAJA_OPER_EXIT_PAYM.
         ZBNKHEADER-CORREL_ID = cl_system_uuid=>if_system_uuid_rfc4122_static~create_uuid_c36_by_version( version = 4 )..
         ZBNKHEADER-TRANS_IP = cl_system_uuid=>if_system_uuid_rfc4122_static~create_uuid_c36_by_version( version = 4 )..
         ZBNKHEADER-PROCESS = 'OPERD'.
-        CALL FUNCTION 'ZTR_PAY_GENERATE_IDOC_FUNC'
+
+        CALL FUNCTION 'ZTR_PAY_GENERATE_IDOC_FUNC_V2'
           EXPORTING
             ZBNKHEADER                     = ZBNKHEADER
             LAUFD                          = ORIG_LAUFD
@@ -592,6 +594,7 @@ FUNCTION Z_TR_CAJA_OPER_EXIT_PAYM.
             ZTRPAYH                        = TZTRPAYH
             ZTRPAYP                        = TZTRPAYP
             ZTRPAY_META                    = TZTRPAY_META
+            ZTRPAY_METAP                   = TZTRPAY_METAP
             IT_BAPIRET2                    = it_bapiret2
           CHANGING
             MASTER_IDOC_CONTROL            = EDIDC

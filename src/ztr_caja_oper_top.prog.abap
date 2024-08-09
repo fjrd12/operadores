@@ -4,8 +4,13 @@
 TABLES: ztr_coper_header, zes_coper_header, ztr_coper_retry, ztr_coper_pos.
 
 *Constantes
-CONSTANTS: error TYPE c LENGTH 132 VALUE '@0A@'.
-CONSTANTS: succesfull TYPE c LENGTH 132 VALUE '@08@'.
+CONSTANTS: error            TYPE c LENGTH 132 VALUE '@0A@',
+           succesfull       TYPE c LENGTH 132 VALUE '@08@',
+           coper_pos_icon   TYPE c LENGTH 132 VALUE '@3J@',
+           coper_retry_icon TYPE c LENGTH 132 VALUE '@2W@',
+           log_icon         TYPE c LENGTH 132 VALUE '@RN@',
+           pay_prop_icon    TYPE c LENGTH 132 VALUE '@Y5@',
+           im_system        TYPE c LENGTH 10 VALUE '9999999999'. "im_system default para verificar si es registro hijo
 
 * Field Symbols
 FIELD-SYMBOLS <fs_coper_header> TYPE zes_coper_header.
@@ -23,13 +28,22 @@ SELECT-OPTIONS: p_bktxt     FOR ztr_coper_header-im_bktxt MODIF ID g1.
 SELECT-OPTIONS: p_datum     FOR ztr_coper_header-im_datum MODIF ID g1 DEFAULT sy-datum.
 SELECT-OPTIONS: p_user      FOR ztr_coper_header-im_user MODIF ID g1.
 SELECT-OPTIONS: p_belnr     FOR ztr_coper_header-im_belnr MODIF ID g1.
+SELECT-OPTIONS: p_gjahr    FOR ztr_coper_header-im_gjahr MODIF ID g1.
 SELECT-OPTIONS: p_status    FOR ztr_coper_header-im_status MODIF ID g1.
 SELECT-OPTIONS: p_lifnr    FOR ztr_coper_pos-im_lifnr MODIF ID g1.
 SELECTION-SCREEN END OF BLOCK b1.
 
 
 *Variables
+
+* Definición diferida de la clase 'cls_alv_oo'
+* Esto significa que la definición de esta clase se encuentra en otro lugar del código
+* y será importada más adelante cuando se necesite usar esta clase
 CLASS cls_alv_oo DEFINITION DEFERRED.
+
+* Definición diferida de la clase 'cls_events'
+* Al igual que con 'cls_alv_oo', la definición de esta clase se encuentra en otro lugar del código
+* y será importada cuando se requiera
 CLASS cls_events DEFINITION DEFERRED.
 
 DATA: ok_code TYPE sy-ucomm.

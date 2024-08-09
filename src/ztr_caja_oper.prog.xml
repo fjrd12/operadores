@@ -341,8 +341,15 @@
     <item>
      <ID>S</ID>
      <KEY>P_DATUM</KEY>
-     <ENTRY>Fecha de pago</ENTRY>
+     <ENTRY>Fecha de ejecución</ENTRY>
      <LENGTH>26</LENGTH>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>P_GJAHR</KEY>
+     <ENTRY>.</ENTRY>
+     <LENGTH>17</LENGTH>
+     <SPLIT>D</SPLIT>
     </item>
     <item>
      <ID>S</ID>
@@ -379,7 +386,7 @@
     <item>
      <ID>S</ID>
      <KEY>P_WWERT</KEY>
-     <ENTRY>Fecha que se recibió</ENTRY>
+     <ENTRY>Fecha de TMS</ENTRY>
      <LENGTH>28</LENGTH>
     </item>
    </TPOOL>

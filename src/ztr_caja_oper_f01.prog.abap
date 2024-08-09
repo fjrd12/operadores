@@ -16,17 +16,17 @@ FORM check_registration.
       <fs_coper_header>-status_icon = succesfull.
     ENDIF.
 
-    <fs_coper_header>-con_pos_icon = '@3J@'.
-    <fs_coper_header>-retry_icon = '@2W@'.
-    <fs_coper_header>-log_err_icon = '@RN@'.
-    <fs_coper_header>-pay_prop_icon = '@Y5@'.
+*   Definiendo iconos de los botones
+    <fs_coper_header>-con_pos_icon = coper_pos_icon.
+    <fs_coper_header>-retry_icon = coper_retry_icon.
+    <fs_coper_header>-log_err_icon = log_icon.
+    <fs_coper_header>-pay_prop_icon = pay_prop_icon.
   ENDLOOP.
 
 ENDFORM.
 
 FORM assign_parent_uuid.
 
-  CONSTANTS: IM_SYSTEM TYPE c LENGTH 10 VALUE '9999999999'.
   DATA: ls_retry TYPE ztr_coper_retry.
 
   select * INTO TABLE it_coper_retry

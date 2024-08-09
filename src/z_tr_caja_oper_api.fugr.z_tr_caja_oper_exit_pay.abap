@@ -20,12 +20,13 @@ FUNCTION Z_TR_CAJA_OPER_EXIT_PAY.
         TZTRPAYH             type STANDARD TABLE OF ZTRPAYH,
         TZTRPAYP             type STANDARD TABLE OF ZTRPAYP,
         TZTRPAY_META         type STANDARD TABLE OF ZTRPAY_META,
+        TZTRPAY_METAP        type STANDARD TABLE OF ZTRPAY_METAP,
         it_bapiret2          type STANDARD TABLE OF bapiret2,
         EDIDC                type EDIDC,
         EDIDD                type EDIDD,
         WZTR_COPER_PROP_LIST type ZTR_COPER_PROP_LIST.
 
-   CALL FUNCTION 'Z_TR_CAJA_OPER_DEBUG'
+  CALL FUNCTION 'Z_TR_CAJA_OPER_DEBUG'
     EXPORTING
       NAME = 'Z_DEBUG2'.
   read table TZTR_COPER_PROP_LIST into WZTR_COPER_PROP_LIST
@@ -62,7 +63,7 @@ FUNCTION Z_TR_CAJA_OPER_EXIT_PAY.
         ZBNKHEADER-TRANS_IP = cl_system_uuid=>if_system_uuid_rfc4122_static~create_uuid_c36_by_version( version = 4 )..
         ZBNKHEADER-PROCESS = 'OPERD'.
 
-        CALL FUNCTION 'ZTR_PAY_GENERATE_IDOC_FUNC'
+        CALL FUNCTION 'ZTR_PAY_GENERATE_IDOC_FUNC_V2'
           EXPORTING
             ZBNKHEADER                     = ZBNKHEADER
             LAUFD                          = reguh_data-LAUFD
@@ -71,6 +72,7 @@ FUNCTION Z_TR_CAJA_OPER_EXIT_PAY.
             ZTRPAYH                        = TZTRPAYH
             ZTRPAYP                        = TZTRPAYP
             ZTRPAY_META                    = TZTRPAY_META
+            ZTRPAY_METAP                   = TZTRPAY_METAP
             IT_BAPIRET2                    = it_bapiret2
           CHANGING
             MASTER_IDOC_CONTROL            = EDIDC

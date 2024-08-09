@@ -22,8 +22,8 @@ CLASS cls_alv_oo IMPLEMENTATION.
     IF p_lifnr IS NOT INITIAL.
       SELECT h~uuid, h~im_system, h~im_bldat, h~im_budat, h~im_bukrs,
        h~im_blart, h~im_waers, h~im_kursf, h~im_wwert, h~im_xblnr,
-       h~im_bktxt, h~im_datum, h~im_user, h~im_uzeit, h~im_belnr, h~im_status
-  INTO TABLE @it_coper_header
+       h~im_bktxt, h~im_datum, h~im_user, h~im_uzeit, h~im_belnr,  h~im_gjahr, h~im_status
+  INTO CORRESPONDING FIELDS OF TABLE @it_coper_header
   FROM ztr_coper_header AS h
   INNER JOIN ztr_coper_pos AS p ON h~uuid = p~uuid
   WHERE p~im_lifnr IN    @p_lifnr
@@ -39,13 +39,14 @@ CLASS cls_alv_oo IMPLEMENTATION.
       AND h~im_user   IN @p_user
       AND h~im_belnr  IN @p_belnr
       AND h~im_status IN @p_status
+      AND h~im_gjahr   IN @p_gjahr
     ORDER BY h~im_bukrs.
 
     ELSE.
       SELECT uuid im_system im_bldat im_budat im_bukrs im_blart im_waers
              im_kursf im_wwert im_xblnr im_bktxt im_datum
-             im_user im_uzeit im_belnr im_status
-        INTO TABLE it_coper_header
+             im_user im_uzeit im_belnr im_gjahr im_status
+        INTO CORRESPONDING FIELDS OF TABLE it_coper_header
         FROM ztr_coper_header
         WHERE uuid      IN p_uuid
         AND   im_system IN p_system
@@ -59,6 +60,7 @@ CLASS cls_alv_oo IMPLEMENTATION.
         AND im_user     IN p_user
         AND im_belnr    IN p_belnr
         AND im_status   IN p_status
+        AND im_gjahr   IN p_gjahr
         ORDER BY im_bukrs.
 
 

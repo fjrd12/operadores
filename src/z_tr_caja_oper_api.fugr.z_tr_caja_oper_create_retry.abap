@@ -56,7 +56,7 @@ FUNCTION z_tr_caja_oper_create_retry.
     WHERE uuid EQ ts_coper_header-uuid.
 
 
-    CALL FUNCTION 'ZMFFI_POLIZA_CONTABLE_V3'
+    CALL FUNCTION 'ZMFFI_POLIZA_CONTABLE'
       EXPORTING
         zfies_payliqadv    = zfies_payliqadv
       IMPORTING

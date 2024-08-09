@@ -8,6 +8,10 @@
     </MODACT>
     <MODACT>
      <NAME>ZTR_PAYM</NAME>
+     <MEMBER>F050S006</MEMBER>
+    </MODACT>
+    <MODACT>
+     <NAME>ZTR_PAYM</NAME>
      <MEMBER>FEDI0004</MEMBER>
     </MODACT>
    </MODACT>
@@ -21,6 +25,7 @@
    <MODATTR>
     <MODATTR>
      <NAME>ZTR_PAYM</NAME>
+     <STATUS>A</STATUS>
     </MODATTR>
    </MODATTR>
   </asx:values>
