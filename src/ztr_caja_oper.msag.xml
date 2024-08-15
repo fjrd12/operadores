@@ -32,6 +32,24 @@
      <MSGNR>003</MSGNR>
      <TEXT>Reintento fallido.</TEXT>
     </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZTR_CAJA_OPER</ARBGB>
+     <MSGNR>004</MSGNR>
+     <TEXT>No hay información para este documento.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZTR_CAJA_OPER</ARBGB>
+     <MSGNR>005</MSGNR>
+     <TEXT>No hay número de documento.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZTR_CAJA_OPER</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>No se puede ir a la FB03 porque falta, documento, sociedad o ejercicio.</TEXT>
+    </T100>
    </T100>
   </asx:values>
  </asx:abap>

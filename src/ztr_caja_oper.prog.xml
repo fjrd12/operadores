@@ -294,6 +294,24 @@
      <LENGTH>40</LENGTH>
     </item>
     <item>
+     <ID>I</ID>
+     <KEY>021</KEY>
+     <ENTRY>No hay número de documento.</ENTRY>
+     <LENGTH>54</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>022</KEY>
+     <ENTRY>No hay información para este documento.</ENTRY>
+     <LENGTH>76</LENGTH>
+    </item>
+    <item>
+     <ID>I</ID>
+     <KEY>023</KEY>
+     <ENTRY>Ir a propuesta</ENTRY>
+     <LENGTH>42</LENGTH>
+    </item>
+    <item>
      <ID>R</ID>
      <ENTRY>Programa ZTR_CAJA_OPER</ENTRY>
      <LENGTH>22</LENGTH>

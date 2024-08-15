@@ -10,6 +10,7 @@ CONSTANTS: error            TYPE c LENGTH 132 VALUE '@0A@',
            coper_retry_icon TYPE c LENGTH 132 VALUE '@2W@',
            log_icon         TYPE c LENGTH 132 VALUE '@RN@',
            pay_prop_icon    TYPE c LENGTH 132 VALUE '@Y5@',
+           v_doc_banca_oper TYPE c VALUE '@2S@' LENGTH 5,
            im_system        TYPE c LENGTH 10 VALUE '9999999999'. "im_system default para verificar si es registro hijo
 
 * Field Symbols

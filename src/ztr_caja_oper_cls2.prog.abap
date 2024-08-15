@@ -55,16 +55,23 @@ CLASS cls_events IMPLEMENTATION.
   ENDMETHOD.                           "handle_user_command
 
   METHOD handle_double_click.
+    DATA: belnr_out  TYPE belnr_d,
+          it_tms_pay TYPE TABLE OF zestms_to_pay.
     READ TABLE it_coper_header ASSIGNING <fs_coper_header> INDEX e_row-index.
     CASE e_column-fieldname.
       WHEN 'IM_BELNR'.
-        DATA: v_gjahr TYPE gjahr.
-        v_gjahr = <fs_coper_header>-im_budat+6(4).
-        CALL FUNCTION 'Z_TR_CAJA_OPER_CALL_TRAN'
+        IF <fs_coper_header>-im_belnr IS NOT INITIAL AND
+           <fs_coper_header>-im_bukrs IS NOT INITIAL AND
+           <fs_coper_header>-im_gjahr IS NOT INITIAL.
+
+          CALL FUNCTION 'Z_TR_CAJA_OPER_CALL_TRAN'
           EXPORTING
             belnr = <fs_coper_header>-im_belnr
             bukrs = <fs_coper_header>-im_bukrs
-            gjahr = v_gjahr.
+            gjahr = <fs_coper_header>-im_gjahr.
+        ELSE.
+          MESSAGE e006(ztr_caja_oper) DISPLAY LIKE 'I'.
+        ENDIF.
 
       WHEN 'CON_POS_ICON'.
         CALL FUNCTION 'Z_TR_CAJA_OPER_DISPLAY_POSI'
@@ -95,7 +102,72 @@ CLASS cls_events IMPLEMENTATION.
         ENDIF.
 
       WHEN 'PAY_PROP_ICON'.
-        MESSAGE: 'Propuesta de pago' TYPE 'I'.
+        IF <fs_coper_header>-im_belnr IS NOT INITIAL.
+
+          CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
+            EXPORTING
+              input  = <fs_coper_header>-im_belnr
+            IMPORTING
+              output = belnr_out.
+
+          " Buscar en la tabla REGUP
+          SELECT DISTINCT laufd,
+                          laufi,
+                          vblnr
+            FROM regup INTO TABLE @it_tms_pay
+            WHERE zbukr = @<fs_coper_header>-im_bukrs AND
+                  belnr = @belnr_out AND
+                  gjahr = @<fs_coper_header>-im_gjahr AND
+                  xvorl = ''.
+
+          IF it_tms_pay IS NOT INITIAL.
+            CALL FUNCTION 'Z_TR_CAJA_OPER_SUBMIT_MPAY'
+              EXPORTING
+                bukrs      = <fs_coper_header>-im_bukrs
+                gjahr      = <fs_coper_header>-im_gjahr
+              TABLES
+                tms_to_pay = it_tms_pay.
+          ELSE.
+            MESSAGE e004(ztr_caja_oper) DISPLAY LIKE 'I'.
+          ENDIF.
+
+        ELSE.
+          MESSAGE e005(ztr_caja_oper) DISPLAY LIKE 'I'.
+        ENDIF.
+
+      WHEN 'BANCA_OPER_ICON'.
+        IF <fs_coper_header>-im_belnr IS NOT INITIAL.
+
+          CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
+            EXPORTING
+              input  = <fs_coper_header>-im_belnr
+            IMPORTING
+              output = belnr_out.
+
+          " Buscar en la tabla REGUP
+          SELECT DISTINCT laufd,
+                          laufi,
+                          vblnr
+            FROM regup INTO TABLE @it_tms_pay
+            WHERE zbukr = @<fs_coper_header>-im_bukrs AND
+                  belnr = @belnr_out AND
+                  gjahr = @<fs_coper_header>-im_gjahr AND
+                  xvorl = ''.
+
+          IF it_tms_pay IS NOT INITIAL.
+            CALL FUNCTION 'ZTR_SUBMIT_TMS_TO_BANCA_OPER'
+              EXPORTING
+                bukrs            = <fs_coper_header>-im_bukrs
+                gjahr            = <fs_coper_header>-im_gjahr
+              TABLES
+                tms_to_pay       = it_tms_pay.
+          ELSE.
+            MESSAGE e004(ztr_caja_oper) DISPLAY LIKE 'I'.
+          ENDIF.
+
+        ELSE.
+          MESSAGE e005(ztr_caja_oper) DISPLAY LIKE 'I'.
+        ENDIF.
       WHEN OTHERS.
     ENDCASE.
   ENDMETHOD.

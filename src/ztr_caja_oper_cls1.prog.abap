@@ -98,8 +98,8 @@ CLASS cls_alv_oo IMPLEMENTATION.
     ( fieldname   = 'RETRY_ICON' scrtext_s = TEXT-013 scrtext_m   = TEXT-013 scrtext_l   = TEXT-013 outputlen = 18 icon = 'X' )
     ( fieldname   = 'LOG_ERR_ICON' scrtext_s = TEXT-017 scrtext_m   = TEXT-017 scrtext_l   = TEXT-017 outputlen = 18 icon = 'X' )
     ( fieldname   = 'PAY_PROP_ICON' scrtext_s = TEXT-019 scrtext_m   = TEXT-019 scrtext_l   = TEXT-019 outputlen = 18 icon = 'X' )
+    ( fieldname   = 'BANCA_OPER_ICON' scrtext_s = TEXT-023 scrtext_m   = TEXT-023 scrtext_l   = TEXT-023 icon = 'X' )
     ( fieldname   = 'PARENT_UUID' scrtext_s = TEXT-018 scrtext_m   = TEXT-018 scrtext_l   = TEXT-018 outputlen = 18 )
-*    ( fieldname   = 'RELA_PAY_ICON' scrtext_s = TEXT-014 scrtext_m   = TEXT-015 scrtext_l   = TEXT-016 )
     ).
 
   ENDMETHOD.

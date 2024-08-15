@@ -3,24 +3,15 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <PROGDIR>
-    <NAME>SAPLZ_TR_CAJA_OPER_API</NAME>
+    <NAME>LZTR_COPER_DOC_LYTOP</NAME>
     <DBAPL>S</DBAPL>
     <DBNA>D$</DBNA>
-    <SUBC>F</SUBC>
+    <SUBC>I</SUBC>
     <APPL>S</APPL>
-    <RLOAD>S</RLOAD>
     <FIXPT>X</FIXPT>
     <LDBNAME>D$S</LDBNAME>
     <UCCHECK>X</UCCHECK>
    </PROGDIR>
-   <TPOOL>
-    <item>
-     <ID>I</ID>
-     <KEY>001</KEY>
-     <ENTRY>Esta propuesta no fue enviada el operadores V 2.0</ENTRY>
-     <LENGTH>98</LENGTH>
-    </item>
-   </TPOOL>
   </asx:values>
  </asx:abap>
 </abapGit>

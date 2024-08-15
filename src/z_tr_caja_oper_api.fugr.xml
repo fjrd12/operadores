@@ -89,6 +89,45 @@
      </DOCUMENTATION>
     </item>
     <item>
+     <FUNCNAME>ZTR_SUBMIT_TMS_TO_BANCA_OPER</FUNCNAME>
+     <SHORT_TEXT>Submit para ir al monitor de pagos desde TMS</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>BUKRS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BUKRS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>GJAHR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>GJAHR</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>TMS_TO_PAY</PARAMETER>
+       <DBSTRUCT>ZESTMS_TO_PAY</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>BUKRS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Sociedad</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>GJAHR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ejercicio</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TMS_TO_PAY</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>estructura ZESTMS_TO_PAY</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
      <FUNCNAME>Z_TR_CAJA_OPER_CALL_TRAN</FUNCNAME>
      <SHORT_TEXT>Call Transaction to FB03</SHORT_TEXT>
      <IMPORT>
@@ -497,6 +536,133 @@
      </DOCUMENTATION>
     </item>
     <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_MERGE_PARAMETER</FUNCNAME>
+     <SHORT_TEXT>Merge de parametro</SHORT_TEXT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>PARAMETRO_COMMA</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>STRING</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>PARAMETROS</PARAMETER>
+       <DBSTRUCT>RSPARAMS</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>NO_CONTENT</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>PARAMETRO_COMMA</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PARAMETROS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>ABAP: Estructura general para PARAMETERs y SELECT OPTIONs</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>NO_CONTENT</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>no_content</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_PROPOSAL</FUNCNAME>
+     <SHORT_TEXT>Crear propuesta en automático</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>ZLSCH</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>SCHZW_BSEG</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>LAUFI</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>LAUFI</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>BUKRS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BUKRS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>LAUFI_EX</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>LAUFI</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>VIAS_DE_PAGO</PARAMETER>
+       <DBSTRUCT>RSPARAMS</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>TIPOS_DOCUMENTOS</PARAMETER>
+       <DBSTRUCT>RSPARAMS</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>PROVEEDORES</PARAMETER>
+       <DBSTRUCT>RSPARAMS</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>NOT_PROVEEDORES</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>ZLSCH</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Vía de pago</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>LAUFI</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Característica de identificación adicional</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>BUKRS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Sociedad</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>LAUFI_EX</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Característica de identificación adicional</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>VIAS_DE_PAGO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>ABAP: Estructura general para PARAMETERs y SELECT OPTIONs</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TIPOS_DOCUMENTOS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>ABAP: Estructura general para PARAMETERs y SELECT OPTIONs</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PROVEEDORES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>ABAP: Estructura general para PARAMETERs y SELECT OPTIONs</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>NOT_PROVEEDORES</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>No se suministraron proveedores</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
      <FUNCNAME>Z_TR_CAJA_OPER_RECORD_CALL</FUNCNAME>
      <SHORT_TEXT>Guarda el llamado de la interfaz de operadores</SHORT_TEXT>
      <IMPORT>
@@ -691,6 +857,45 @@
        <PARAMETER>LAUFI</PARAMETER>
        <KIND>P</KIND>
        <STEXT>Característica de identificación adicional</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_SUBMIT_MPAY</FUNCNAME>
+     <SHORT_TEXT>Submit para ir al monitor de pagos desde TMS</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>BUKRS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BUKRS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>GJAHR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>GJAHR</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>TMS_TO_PAY</PARAMETER>
+       <DBSTRUCT>ZESTMS_TO_PAY</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>BUKRS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Sociedad</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>GJAHR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ejercicio</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TMS_TO_PAY</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>estructura ZESTMS_TO_PAY</STEXT>
       </RSFDO>
      </DOCUMENTATION>
     </item>

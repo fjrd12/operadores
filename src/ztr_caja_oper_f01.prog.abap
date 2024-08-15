@@ -21,6 +21,7 @@ FORM check_registration.
     <fs_coper_header>-retry_icon = coper_retry_icon.
     <fs_coper_header>-log_err_icon = log_icon.
     <fs_coper_header>-pay_prop_icon = pay_prop_icon.
+    <fs_coper_header>-BANCA_OPER_ICON = v_doc_banca_oper.
   ENDLOOP.
 
 ENDFORM.
