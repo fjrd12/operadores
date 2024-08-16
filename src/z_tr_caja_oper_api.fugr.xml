@@ -753,6 +753,11 @@
        <REFERENCE>X</REFERENCE>
        <TYP>LAUFI</TYP>
       </RSEXP>
+      <RSEXP>
+       <PARAMETER>PROCESS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>CHAR10</TYP>
+      </RSEXP>
      </EXPORT>
      <DOCUMENTATION>
       <RSFDO>
@@ -779,6 +784,11 @@
        <PARAMETER>ORIG_LAUFI</PARAMETER>
        <KIND>P</KIND>
        <STEXT>Característica de identificación adicional</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PROCESS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Campo de texto, longitud 10</STEXT>
       </RSFDO>
      </DOCUMENTATION>
     </item>

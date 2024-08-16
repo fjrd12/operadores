@@ -26,10 +26,10 @@ FUNCTION Z_TR_CAJA_OPER_MERGE_PARAMETER.
 
     loop at parametros into wrsparams.
       tabix = sy-tabix.
-      if tabix = longi.
-        concatenate PARAMETRO_COMMA wrsparams-low into wrsparams-low separated by ','.
+      if tabix = 1.
+        PARAMETRO_COMMA = WRSPARAMS-LOW.
       else.
-        concatenate PARAMETRO_COMMA wrsparams-low into wrsparams-low.
+        concatenate PARAMETRO_COMMA wrsparams-low into PARAMETRO_COMMA separated by ','.
       endif.
     endloop.
 

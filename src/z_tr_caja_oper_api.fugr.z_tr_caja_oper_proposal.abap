@@ -55,9 +55,10 @@ FUNCTION Z_TR_CAJA_OPER_PROPOSAL.
     rg_vonkk-high =  ' '.
     append rg_vonkk.
   endloop.
-
-  "se suma 1 al inidcador de propuesta
-  PERFORM id USING  laufi vg_laufi.
+*
+*  "se suma 1 al inidcador de propuesta
+*  PERFORM id USING  laufi vg_laufi.
+  vg_laufi = laufi.
 
   SUBMIT rff110s
   WITH par_lfd      EQ sy-datum

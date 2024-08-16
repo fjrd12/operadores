@@ -131,7 +131,7 @@ FORM set_data .
     PERFORM rango_acreedor USING <fs_soc>-bukrs.
 
     DO 2 TIMES.
-      CLEAR gt_reguh_aux.
+      CLEAR: gt_reguh_aux, vg_laufi.
       IF sy-index EQ 1.
         gt_reguh_aux[] = gt_reguh_l[].
         vl_zwe = <fs_soc>-zweln.
@@ -167,10 +167,14 @@ FORM set_data .
       IF sy-subrc EQ 0.
 
         IF rg_vonkk IS NOT INITIAL.
-          PERFORM id USING  <fs_reguh>-laufi vg_laufi.
-          LAUFI = vg_laufi.
 
           loop at s_via.
+            if vg_laufi is NOT initial.
+              <fs_reguh>-laufi = vg_laufi.
+            endif.
+            PERFORM id USING  <fs_reguh>-laufi vg_laufi.
+            LAUFI = vg_laufi.
+            clear: TVIAS_DE_PAGO, TTIPOS_DOCUMENTOS, TPROVEEDORES.
             ZLSCH = s_via-low.
             WVIAS_DE_PAGO-SELNAME = 'VIAS_DE_PAGO'.
             WVIAS_DE_PAGO-KIND = 'S'.
@@ -210,9 +214,11 @@ FORM set_data .
               WPROVEEDORES-KIND = 'S'.
               WPROVEEDORES-SIGN = 'I'.
               WPROVEEDORES-OPTION = 'EQ'.
-              WPROVEEDORES-LOW = 'KT'.
+              WPROVEEDORES-LOW = rg_vonkk-low.
               APPEND WPROVEEDORES TO TPROVEEDORES.
             ENDLOOP.
+
+            BUKRS = <fs_soc>-bukrs.
 
             CALL FUNCTION 'Z_TR_CAJA_OPER_PROPOSAL'
               EXPORTING

@@ -50,7 +50,8 @@ FUNCTION Z_TR_CAJA_OPER_EXIT_PAYM.
         lv_foot(2),
         lv_doc1r          TYPE doc1r_fpm,
         lv_ident          TYPE string,
-        SCENARIO          TYPE CHAR10.
+        SCENARIO          TYPE CHAR10,
+        PROCESS           TYPE CHAR10.
 
   DATA    p_numero(4) type c. "DVBP
   data: ls_data type zfi_valores. "quitar MMB 01042022
@@ -102,7 +103,6 @@ FUNCTION Z_TR_CAJA_OPER_EXIT_PAYM.
     lv_laufd = <F_LAUFD>.
     assign ('(SAPFPAYM)PM_LAUFI') to <F_LAUFI>.
     lv_laufi = <F_LAUFI>.
-
     CALL FUNCTION 'Z_TR_CAJA_OPER_SCENARIO'
       EXPORTING
         LAUFD      = lv_laufd
@@ -110,7 +110,8 @@ FUNCTION Z_TR_CAJA_OPER_EXIT_PAYM.
       IMPORTING
         SCENARIO   = SCENARIO
         ORIG_LAUFD = ORIG_LAUFD
-        ORIG_LAUFI = ORIG_LAUFI.
+        ORIG_LAUFI = ORIG_LAUFI
+        PROCESS    = PROCESS.
 
     case SCENARIO.
       when 'NO_CLASSIF'.
@@ -583,7 +584,7 @@ FUNCTION Z_TR_CAJA_OPER_EXIT_PAYM.
 
         ZBNKHEADER-CORREL_ID = cl_system_uuid=>if_system_uuid_rfc4122_static~create_uuid_c36_by_version( version = 4 )..
         ZBNKHEADER-TRANS_IP = cl_system_uuid=>if_system_uuid_rfc4122_static~create_uuid_c36_by_version( version = 4 )..
-        ZBNKHEADER-PROCESS = 'OPERD'.
+        ZBNKHEADER-PROCESS = PROCESS.
 
         CALL FUNCTION 'ZTR_PAY_GENERATE_IDOC_FUNC_V2'
           EXPORTING
