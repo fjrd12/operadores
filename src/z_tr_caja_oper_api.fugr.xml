@@ -213,6 +213,36 @@
      </DOCUMENTATION>
     </item>
     <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_DERIVE_BANK</FUNCNAME>
+     <SHORT_TEXT>Deriva el banco a partir de la vía de pago</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>ZLSCH</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>SCHZW_BSEG</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>BANK</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>CHAR10</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>ZLSCH</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Vía de pago</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>BANK</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Campo de texto, longitud 10</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
      <FUNCNAME>Z_TR_CAJA_OPER_DERIVE_VIA</FUNCNAME>
      <SHORT_TEXT>Deriva la via de caja operadores</SHORT_TEXT>
      <IMPORT>
@@ -408,6 +438,17 @@
        <DBFIELD>REGUH</DBFIELD>
        <REFERENCE>X</REFERENCE>
       </RSIMP>
+      <RSIMP>
+       <PARAMETER>PROCESS</PARAMETER>
+       <OPTIONAL>X</OPTIONAL>
+       <REFERENCE>X</REFERENCE>
+       <TYP>CHAR10</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>ZLSCH</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>SCHZW_BSEG</TYP>
+      </RSIMP>
      </IMPORT>
      <EXCEPTION>
       <RSEXC>
@@ -434,6 +475,16 @@
        <PARAMETER>REGUH_DATA</PARAMETER>
        <KIND>P</KIND>
        <STEXT>Datos de pago del programa de pagos</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PROCESS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Campo de texto, longitud 10</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ZLSCH</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Vía de pago</STEXT>
       </RSFDO>
       <RSFDO>
        <PARAMETER>PROC_ERROR</PARAMETER>
@@ -758,6 +809,11 @@
        <REFERENCE>X</REFERENCE>
        <TYP>CHAR10</TYP>
       </RSEXP>
+      <RSEXP>
+       <PARAMETER>ZLSCH</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>SCHZW_BSEG</TYP>
+      </RSEXP>
      </EXPORT>
      <DOCUMENTATION>
       <RSFDO>
@@ -789,6 +845,11 @@
        <PARAMETER>PROCESS</PARAMETER>
        <KIND>P</KIND>
        <STEXT>Campo de texto, longitud 10</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ZLSCH</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Vía de pago</STEXT>
       </RSFDO>
      </DOCUMENTATION>
     </item>
@@ -856,6 +917,16 @@
        <REFERENCE>X</REFERENCE>
        <TYP>LAUFI</TYP>
       </RSIMP>
+      <RSIMP>
+       <PARAMETER>ZLSCH</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>SCHZW_BSEG</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>BUKRS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BUKRS</TYP>
+      </RSIMP>
      </IMPORT>
      <DOCUMENTATION>
       <RSFDO>
@@ -867,6 +938,16 @@
        <PARAMETER>LAUFI</PARAMETER>
        <KIND>P</KIND>
        <STEXT>Característica de identificación adicional</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ZLSCH</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Vía de pago</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>BUKRS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Sociedad</STEXT>
       </RSFDO>
      </DOCUMENTATION>
     </item>

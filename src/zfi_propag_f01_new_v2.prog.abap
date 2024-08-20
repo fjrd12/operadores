@@ -56,14 +56,21 @@ FORM get_data .
     IF sy-subrc = 0.
       " se recuepera indicadores de propuesta del dia
       CLEAR: gt_reguh_l.
-      SELECT laufd laufi zbukr
-        INTO TABLE gt_reguh_l
-        FROM reguh
-        WHERE laufd EQ sy-datum
+*      SELECT laufd laufi zbukr
+*        INTO TABLE gt_reguh_l
+*        FROM reguh
+*        WHERE laufd EQ sy-datum
+*
+*          AND laufi LIKE 'L%'
+**        INI DVBP 10.06.2022
+*        AND zbukr EQ  p_bukrs.
+      SELECT laufd laufi bukrs
+      INTO TABLE gt_reguh_l
+      FROM ZTR_COPER_PROP
+      WHERE laufd EQ sy-datum
+        AND laufi LIKE 'L%'
+        AND bukrs EQ  p_bukrs.
 
-          AND laufi LIKE 'L%'
-*        INI DVBP 10.06.2022
-        AND zbukr EQ  p_bukrs.
 *        FIN DVBP 10.06.2022
       "Indica que es la primera propuesta de pago de liquidación operadores
       IF sy-subrc NE 0.
@@ -137,13 +144,22 @@ FORM set_data .
         vl_zwe = <fs_soc>-zweln.
       ELSE.
         CLEAR: gt_reguh_o.
-        SELECT laufd laufi zbukr
+*        SELECT laufd laufi zbukr
+*          INTO TABLE gt_reguh_o
+*          FROM reguh
+*          WHERE laufd EQ sy-datum
+*            AND laufi LIKE 'O%'
+**          *        INI DVBP 10.06.2022
+*        AND zbukr EQ  p_bukrs.
+
+
+        SELECT laufd laufi bukrs
           INTO TABLE gt_reguh_o
-          FROM reguh
+          FROM ZTR_COPER_PROP
           WHERE laufd EQ sy-datum
             AND laufi LIKE 'O%'
-*          *        INI DVBP 10.06.2022
-        AND zbukr EQ  p_bukrs.
+            AND bukrs EQ  p_bukrs.
+
 *        FIN DVBP 10.06.2022
 
         "Indica que es la primera propuesta de pago de liquidación operadores

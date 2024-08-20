@@ -137,21 +137,22 @@ FUNCTION Z_TR_CAJA_OPER_PROPOSAL.
       CALL FUNCTION 'Z_TR_CAJA_OPER_STORE_INDEX'
         EXPORTING
           LAUFD = laufd
-          LAUFI = vg_laufi.
+          LAUFI = laufi_ex
+          ZLSCH = ZLSCH
+          BUKRS = bukrs.
 
       REFRESH: r_lfd,r_lfi.
-
+      clear r_lfd.
       r_lfd-sign = 'I'.
       r_lfd-option = 'EQ'.
       r_lfd-low = sy-datum.
-      r_lfd-high =  sy-datum.
+*      r_lfd-high =  sy-datum.
       append r_lfd.
 
-
+      clear r_lfi.
       r_lfi-sign = 'I'.
       r_lfi-option = 'EQ'.
-      r_lfi-low = sy-datum.
-      r_lfi-high =  sy-datum.
+      r_lfi-low = laufi_ex.
       append r_lfi.
 
       SUBMIT sapfpaym_merge

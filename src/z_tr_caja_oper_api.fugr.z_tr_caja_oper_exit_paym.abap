@@ -51,7 +51,8 @@ FUNCTION Z_TR_CAJA_OPER_EXIT_PAYM.
         lv_doc1r          TYPE doc1r_fpm,
         lv_ident          TYPE string,
         SCENARIO          TYPE CHAR10,
-        PROCESS           TYPE CHAR10.
+        PROCESS           TYPE CHAR10,
+        ZLSCH             TYPE SCHZW_BSEG.
 
   DATA    p_numero(4) type c. "DVBP
   data: ls_data type zfi_valores. "quitar MMB 01042022
@@ -103,6 +104,7 @@ FUNCTION Z_TR_CAJA_OPER_EXIT_PAYM.
     lv_laufd = <F_LAUFD>.
     assign ('(SAPFPAYM)PM_LAUFI') to <F_LAUFI>.
     lv_laufi = <F_LAUFI>.
+
     CALL FUNCTION 'Z_TR_CAJA_OPER_SCENARIO'
       EXPORTING
         LAUFD      = lv_laufd
@@ -111,7 +113,9 @@ FUNCTION Z_TR_CAJA_OPER_EXIT_PAYM.
         SCENARIO   = SCENARIO
         ORIG_LAUFD = ORIG_LAUFD
         ORIG_LAUFI = ORIG_LAUFI
-        PROCESS    = PROCESS.
+        PROCESS    = PROCESS
+        ZLSCH      = ZLSCH.
+
 
     case SCENARIO.
       when 'NO_CLASSIF'.
@@ -580,6 +584,14 @@ FUNCTION Z_TR_CAJA_OPER_EXIT_PAYM.
             ZBNKHEADER-BANK = 'BANORTE'.
           when 'HSB'.
             ZBNKHEADER-BANK = 'HSBC'.
+          when OTHERS.
+
+            CALL FUNCTION 'Z_TR_CAJA_OPER_DERIVE_BANK'
+              EXPORTING
+                ZLSCH = ZLSCH
+              IMPORTING
+                BANK  = ZBNKHEADER-BANK.
+
         endcase.
 
         ZBNKHEADER-CORREL_ID = cl_system_uuid=>if_system_uuid_rfc4122_static~create_uuid_c36_by_version( version = 4 )..

@@ -23,6 +23,7 @@ CLASS cls_events IMPLEMENTATION.
   METHOD handle_toolbar.
     DATA: ls_toolbar  TYPE stb_button.
 
+
 * append a separator to normal toolbar
     CLEAR ls_toolbar.
     MOVE 3 TO ls_toolbar-butn_type.

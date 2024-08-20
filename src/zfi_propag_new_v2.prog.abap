@@ -12,17 +12,33 @@ INCLUDE ZFI_PROPAG_SEL_NEW_V2.
 INCLUDE ZFI_PROPAG_F01_NEW_V2.
 
 at SELECTION-SCREEN OUTPUT.
+  data: ttvarvc type STANDARD TABLE OF tvarvc,
+        wtvarvc type tvarvc.
 
-  refresh s_via.
-  clear s_via.
-  s_via-sign = 'I'.
-  s_via-option  = 'EQ'.
-  s_via-low  = '8'.
-  append s_via.
-  s_via-sign = 'I'.
-  s_via-option  = 'EQ'.
-  s_via-low  = '9'.
-  append s_via.
+  select * from tvarvc
+    into table ttvarvc where name = 'Z_VIAS'.
+
+  if sy-subrc ne 0.
+    refresh s_via.
+    clear s_via.
+    s_via-sign = 'I'.
+    s_via-option  = 'EQ'.
+    s_via-low  = '9'.
+    append s_via.
+    s_via-sign = 'I'.
+    s_via-option  = 'EQ'.
+    s_via-low  = '8'.
+    append s_via.
+  else.
+    refresh s_via.
+    loop at ttvarvc into wtvarvc.
+      clear s_via.
+      s_via-sign = 'I'.
+      s_via-option  = 'EQ'.
+      s_via-low  = wtvarvc-low.
+      append s_via.
+    endloop.
+  endif.
 
 start-of-selection.
   perform get_data.

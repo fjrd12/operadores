@@ -9,6 +9,7 @@ FUNCTION Z_TR_CAJA_OPER_SCENARIO.
 *"     REFERENCE(ORIG_LAUFD) TYPE  LAUFD
 *"     REFERENCE(ORIG_LAUFI) TYPE  LAUFI
 *"     REFERENCE(PROCESS) TYPE  CHAR10
+*"     REFERENCE(ZLSCH) TYPE  SCHZW_BSEG
 *"----------------------------------------------------------------------
 
   data: reguhm         type reguhm,
@@ -35,6 +36,7 @@ FUNCTION Z_TR_CAJA_OPER_SCENARIO.
               LAUFI = reguhm1-LAUFI.
       if sy-subrc = 0.
         SCENARIO = 'OPERADORES'.
+        ZLSCH = ZTR_COPER_PROP-ZLSCH.
         ORIG_LAUFD = reguhm1-LAUFD.
         ORIG_LAUFI = reguhm1-LAUFI.
         if reguhm1-LAUFI(1) = 'L'.
@@ -43,6 +45,7 @@ FUNCTION Z_TR_CAJA_OPER_SCENARIO.
         if reguhm1-LAUFI(1) = 'O'.
           PROCESS = 'OPERD'.
         endif.
+
       else.
         SCENARIO = 'NO_CLASSIFIED'.
       endif.

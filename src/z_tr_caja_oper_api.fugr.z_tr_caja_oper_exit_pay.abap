@@ -3,6 +3,8 @@ FUNCTION Z_TR_CAJA_OPER_EXIT_PAY.
 *"*"Interfase local
 *"  IMPORTING
 *"     REFERENCE(REGUH_DATA) LIKE  REGUH STRUCTURE  REGUH
+*"     REFERENCE(PROCESS) TYPE  CHAR10 OPTIONAL
+*"     REFERENCE(ZLSCH) TYPE  SCHZW_BSEG
 *"  EXCEPTIONS
 *"      PROC_ERROR
 *"      ERROR_IN_IDOC_CONTROL
@@ -57,11 +59,17 @@ FUNCTION Z_TR_CAJA_OPER_EXIT_PAY.
             ZBNKHEADER-BANK = 'BANORTE'.
           when 'HSB'.
             ZBNKHEADER-BANK = 'HSBC'.
+          when OTHERS.
+            CALL FUNCTION 'Z_TR_CAJA_OPER_DERIVE_BANK'
+              EXPORTING
+                ZLSCH = ZLSCH
+              IMPORTING
+                BANK  = ZBNKHEADER-BANK.
         endcase.
 
         ZBNKHEADER-CORREL_ID = cl_system_uuid=>if_system_uuid_rfc4122_static~create_uuid_c36_by_version( version = 4 )..
         ZBNKHEADER-TRANS_IP = cl_system_uuid=>if_system_uuid_rfc4122_static~create_uuid_c36_by_version( version = 4 )..
-        ZBNKHEADER-PROCESS = 'OPERD'.
+        ZBNKHEADER-PROCESS = PROCESS.
 
         CALL FUNCTION 'ZTR_PAY_GENERATE_IDOC_FUNC_V2'
           EXPORTING
