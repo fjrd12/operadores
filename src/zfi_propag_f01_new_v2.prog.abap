@@ -127,7 +127,9 @@ FORM set_data .
         TTIPOS_DOCUMENTOS TYPE STANDARD TABLE OF  RSPARAMS,
         WTIPOS_DOCUMENTOS	TYPE RSPARAMS,
         TPROVEEDORES      TYPE STANDARD TABLE OF  RSPARAMS,
-        WPROVEEDORES      TYPE RSPARAMS.
+        WPROVEEDORES      TYPE RSPARAMS,
+        TLAYOUT           TYPE STANDARD TABLE OF  RSPARAMS,
+        WLAYOUT           TYPE RSPARAMS.
 
   RANGES: r_lfd FOR reguh-laufd,
    r_lfi FOR reguh-laufi.
@@ -200,29 +202,41 @@ FORM set_data .
             APPEND WVIAS_DE_PAGO TO TVIAS_DE_PAGO.
 
             IF LAUFI(1) = 'L'.
-              WTIPOS_DOCUMENTOS-SELNAME = 'TDOCUMENTO'.
-              WTIPOS_DOCUMENTOS-KIND = 'S'.
-              WTIPOS_DOCUMENTOS-SIGN = 'I'.
-              WTIPOS_DOCUMENTOS-OPTION = 'EQ'.
-              WTIPOS_DOCUMENTOS-LOW = 'KL'.
-              APPEND WTIPOS_DOCUMENTOS TO TTIPOS_DOCUMENTOS.
-              WTIPOS_DOCUMENTOS-LOW = 'LP'.
-              APPEND WTIPOS_DOCUMENTOS TO TTIPOS_DOCUMENTOS.
-              WTIPOS_DOCUMENTOS-LOW = 'LT'.
-              APPEND WTIPOS_DOCUMENTOS TO TTIPOS_DOCUMENTOS.
-              WTIPOS_DOCUMENTOS-LOW = 'LQ'.
-              APPEND WTIPOS_DOCUMENTOS TO TTIPOS_DOCUMENTOS.
+*              WTIPOS_DOCUMENTOS-SELNAME = 'TDOCUMENTO'.
+*              WTIPOS_DOCUMENTOS-KIND = 'S'.
+*              WTIPOS_DOCUMENTOS-SIGN = 'I'.
+*              WTIPOS_DOCUMENTOS-OPTION = 'EQ'.
+*              WTIPOS_DOCUMENTOS-LOW = 'KL'.
+*              APPEND WTIPOS_DOCUMENTOS TO TTIPOS_DOCUMENTOS.
+*              WTIPOS_DOCUMENTOS-LOW = 'LP'.
+*              APPEND WTIPOS_DOCUMENTOS TO TTIPOS_DOCUMENTOS.
+*              WTIPOS_DOCUMENTOS-LOW = 'LT'.
+*              APPEND WTIPOS_DOCUMENTOS TO TTIPOS_DOCUMENTOS.
+*              WTIPOS_DOCUMENTOS-LOW = 'LQ'.
+*              APPEND WTIPOS_DOCUMENTOS TO TTIPOS_DOCUMENTOS.
+              WLAYOUT-SELNAME = 'TLAYOUT'.
+              WLAYOUT-KIND = 'S'.
+              WLAYOUT-SIGN = 'I'.
+              WLAYOUT-OPTION = 'EQ'.
+              WLAYOUT-LOW = 'N'.
+              APPEND WLAYOUT TO TLAYOUT.
             ENDIF.
 
             IF LAUFI(1) = 'O'.
-              WTIPOS_DOCUMENTOS-SELNAME = 'TDOCUMENTO'.
-              WTIPOS_DOCUMENTOS-KIND = 'S'.
-              WTIPOS_DOCUMENTOS-SIGN = 'I'.
-              WTIPOS_DOCUMENTOS-OPTION = 'EQ'.
-              WTIPOS_DOCUMENTOS-LOW = 'KT'.
-              APPEND WTIPOS_DOCUMENTOS TO TTIPOS_DOCUMENTOS.
-              WTIPOS_DOCUMENTOS-LOW = 'KV'.
-              APPEND WTIPOS_DOCUMENTOS TO TTIPOS_DOCUMENTOS.
+              WLAYOUT-SELNAME = 'TLAYOUT'.
+              WLAYOUT-KIND = 'S'.
+              WLAYOUT-SIGN = 'I'.
+              WLAYOUT-OPTION = 'EQ'.
+              WLAYOUT-LOW = 'G'.
+              APPEND WLAYOUT TO TLAYOUT.
+*              WTIPOS_DOCUMENTOS-SELNAME = 'TDOCUMENTO'.
+*              WTIPOS_DOCUMENTOS-KIND = 'S'.
+*              WTIPOS_DOCUMENTOS-SIGN = 'I'.
+*              WTIPOS_DOCUMENTOS-OPTION = 'EQ'.
+*              WTIPOS_DOCUMENTOS-LOW = 'KT'.
+*              APPEND WTIPOS_DOCUMENTOS TO TTIPOS_DOCUMENTOS.
+*              WTIPOS_DOCUMENTOS-LOW = 'KV'.
+*              APPEND WTIPOS_DOCUMENTOS TO TTIPOS_DOCUMENTOS.
             ENDIF.
 
             LOOP AT rg_vonkk.
@@ -236,20 +250,20 @@ FORM set_data .
 
             BUKRS = <fs_soc>-bukrs.
 
-            CALL FUNCTION 'Z_TR_CAJA_OPER_PROPOSAL'
+            CALL FUNCTION 'Z_TR_CAJA_OPER_PROPOSAL_V2'
               EXPORTING
-                ZLSCH            = ZLSCH
-                LAUFI            = LAUFI
-                BUKRS            = BUKRS
+                ZLSCH           = ZLSCH
+                LAUFI           = LAUFI
+                BUKRS           = BUKRS
               IMPORTING
-                LAUFI_EX         = vg_laufi
+                LAUFI_EX        = vg_laufi
               TABLES
-                VIAS_DE_PAGO     = TVIAS_DE_PAGO
-                TIPOS_DOCUMENTOS = TTIPOS_DOCUMENTOS
-                PROVEEDORES      = TPROVEEDORES
+                VIAS_DE_PAGO    = TVIAS_DE_PAGO
+                TIPO_CONCEPTO   = TLAYOUT
+                PROVEEDORES     = TPROVEEDORES
               EXCEPTIONS
-                NOT_PROVEEDORES  = 1
-                OTHERS           = 2.
+                NOT_PROVEEDORES = 1
+                OTHERS          = 2.
             IF SY-SUBRC <> 0.
 * Implement suitable error handling here
             else.

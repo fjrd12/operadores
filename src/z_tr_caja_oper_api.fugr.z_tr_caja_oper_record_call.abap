@@ -16,7 +16,9 @@ FUNCTION Z_TR_CAJA_OPER_RECORD_CALL.
         WZTR_COPER_POS      type ZTR_COPER_POS,
         WZFIES_IMITPOSITION type ZFIES_IMITPOSITION,
         WZFIES_EX_IT_RETURN	type ZFIES_EX_IT_RETURN,
-        wbkpf               type bkpf.
+        wbkpf               type bkpf,
+        concepto            type FCC_FDNAME,
+        tipo                type FCC_FDNAME.
 
   move-CORRESPONDING ZFIES_PAYLIQADV to WZTR_COPER_HEADER.
   UUID = WZTR_COPER_HEADER-UUID = cl_system_uuid=>if_system_uuid_rfc4122_static~create_uuid_c36_by_version( version = 4 ).
@@ -49,6 +51,24 @@ FUNCTION Z_TR_CAJA_OPER_RECORD_CALL.
     move-CORRESPONDING WZFIES_IMITPOSITION to WZTR_COPER_POS.
     WZTR_COPER_POS-IM_SYSTEM = WZTR_COPER_HEADER-IM_SYSTEM.
     WZTR_COPER_POS-UUID = WZTR_COPER_HEADER-UUID.
+
+    CALL FUNCTION 'Z_TR_CAJA_OPER_DERIVE_KOSTL'
+      EXPORTING
+        KOSTL     = WZFIES_IMITPOSITION-im_kostl
+      IMPORTING
+        CONCEPTO  = concepto
+        TIPO      = tipo
+      EXCEPTIONS
+        NOT_FOUND = 1
+        OTHERS    = 2.
+
+    if sy-subrc = 0.
+      WZTR_COPER_POS-tipo_concepto = tipo.
+*      WZTR_COPER_POS-concepto = concepto.
+    else.
+      clear: WZTR_COPER_POS-TIPO_CONCEPTO.
+*             WZTR_COPER_POS-concepto.
+    endif.
     append WZTR_COPER_POS to TZTR_COPER_POS.
   endloop.
 

@@ -50,6 +50,18 @@
      <MSGNR>006</MSGNR>
      <TEXT>No se puede ir a la FB03 porque falta, documento, sociedad o ejercicio.</TEXT>
     </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZTR_CAJA_OPER</ARBGB>
+     <MSGNR>007</MSGNR>
+     <TEXT>No hay información que mostrar.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZTR_CAJA_OPER</ARBGB>
+     <MSGNR>010</MSGNR>
+     <TEXT>El banco propio no esta configurado para el banco &amp;1 de la sociedad &amp;2</TEXT>
+    </T100>
    </T100>
   </asx:values>
  </asx:abap>

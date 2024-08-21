@@ -243,6 +243,106 @@
      </DOCUMENTATION>
     </item>
     <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_DERIVE_CONCEPTO</FUNCNAME>
+     <SHORT_TEXT>Derivar conceptos de pago</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>DERIVAR_CONCEPTO</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>STRING</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>CONCEPTO</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>FCC_FDNAME</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>TIPO</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>FCC_FDNAME</TYP>
+      </RSEXP>
+     </EXPORT>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>NOT_FOUND</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>DERIVAR_CONCEPTO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Campo de texto, longitud 10</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CONCEPTO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Campo de texto, longitud 10</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TIPO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Campo de texto, longitud 10</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>NOT_FOUND</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>not_found</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_DERIVE_KOSTL</FUNCNAME>
+     <SHORT_TEXT>Derivar el concepto del centro de costo</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>KOSTL</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>KOSTL</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>CONCEPTO</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>FCC_FDNAME</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>TIPO</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>FCC_FDNAME</TYP>
+      </RSEXP>
+     </EXPORT>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>NOT_FOUND</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>KOSTL</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Centro de coste</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>CONCEPTO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Campo de texto, longitud 10</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TIPO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Campo de texto, longitud 10</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>NOT_FOUND</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>not_found</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
      <FUNCNAME>Z_TR_CAJA_OPER_DERIVE_VIA</FUNCNAME>
      <SHORT_TEXT>Deriva la via de caja operadores</SHORT_TEXT>
      <IMPORT>
@@ -587,6 +687,66 @@
      </DOCUMENTATION>
     </item>
     <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_GET_OWN_BANK</FUNCNAME>
+     <SHORT_TEXT>Obtener el banco propio</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>BANCO</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZTR_PAY_BANCOS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>BUKRS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BUKRS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>HBKID</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>HBKID</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>HKTID</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>HKTID</TYP>
+      </RSEXP>
+     </EXPORT>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>NOT_FOUND</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>BANCO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Elemento de datos de bancos de PAYTRAX</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>BUKRS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Sociedad</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>HBKID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Clave breve para banco propio</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>HKTID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Clave breve para un banco/cuenta</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>NOT_FOUND</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>NOT_FOUND</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
      <FUNCNAME>Z_TR_CAJA_OPER_MERGE_PARAMETER</FUNCNAME>
      <SHORT_TEXT>Merge de parametro</SHORT_TEXT>
      <EXPORT>
@@ -698,6 +858,95 @@
       </RSFDO>
       <RSFDO>
        <PARAMETER>TIPOS_DOCUMENTOS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>ABAP: Estructura general para PARAMETERs y SELECT OPTIONs</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PROVEEDORES</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>ABAP: Estructura general para PARAMETERs y SELECT OPTIONs</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>NOT_PROVEEDORES</PARAMETER>
+       <KIND>X</KIND>
+       <STEXT>No se suministraron proveedores</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_PROPOSAL_V2</FUNCNAME>
+     <SHORT_TEXT>Crear propuesta en automático</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>ZLSCH</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>SCHZW_BSEG</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>LAUFI</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>LAUFI</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>BUKRS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BUKRS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>LAUFI_EX</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>LAUFI</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>VIAS_DE_PAGO</PARAMETER>
+       <DBSTRUCT>RSPARAMS</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>TIPO_CONCEPTO</PARAMETER>
+       <DBSTRUCT>RSPARAMS</DBSTRUCT>
+      </RSTBL>
+      <RSTBL>
+       <PARAMETER>PROVEEDORES</PARAMETER>
+       <DBSTRUCT>RSPARAMS</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <EXCEPTION>
+      <RSEXC>
+       <EXCEPTION>NOT_PROVEEDORES</EXCEPTION>
+      </RSEXC>
+     </EXCEPTION>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>ZLSCH</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Vía de pago</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>LAUFI</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Característica de identificación adicional</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>BUKRS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Sociedad</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>LAUFI_EX</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Característica de identificación adicional</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>VIAS_DE_PAGO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>ABAP: Estructura general para PARAMETERs y SELECT OPTIONs</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TIPO_CONCEPTO</PARAMETER>
        <KIND>P</KIND>
        <STEXT>ABAP: Estructura general para PARAMETERs y SELECT OPTIONs</STEXT>
       </RSFDO>
