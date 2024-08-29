@@ -128,6 +128,25 @@
      </DOCUMENTATION>
     </item>
     <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_BLOCK_PROCESS</FUNCNAME>
+     <SHORT_TEXT>Bloquear proceso de trabajo</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>THRESHOLD</PARAMETER>
+       <DEFAULT>30</DEFAULT>
+       <REFERENCE>X</REFERENCE>
+       <TYP>SY-TABIX</TYP>
+      </RSIMP>
+     </IMPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>THRESHOLD</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Campo de sistema ABAP: Índice de líneas de tabla interna</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
      <FUNCNAME>Z_TR_CAJA_OPER_CALL_TRAN</FUNCNAME>
      <SHORT_TEXT>Call Transaction to FB03</SHORT_TEXT>
      <IMPORT>
@@ -293,6 +312,99 @@
      </DOCUMENTATION>
     </item>
     <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_DERIVE_DATA</FUNCNAME>
+     <SHORT_TEXT>Caja operadores derivar datos</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>BLART</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BLART</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>BUKRS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BUKRS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <CHANGING>
+      <RSCHA>
+       <PARAMETER>ZFIES_IMITPOSITION</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ZFIES_IMITPOSITION</TYP>
+      </RSCHA>
+     </CHANGING>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>PYMT_METH</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>ACPI_ZLSCH</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>REF_KEY_3</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>XREF3</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>HBKID</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>HBKID</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>HKTID</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>HKTID</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>TRETURN</PARAMETER>
+       <DBSTRUCT>BAPIRET2</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>BLART</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Clase de documento</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>BUKRS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Sociedad</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>PYMT_METH</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Vía de pago</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>REF_KEY_3</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Clave de referencia para la posición de documento</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>HBKID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Clave breve para banco propio</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>HKTID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Clave breve para un banco/cuenta</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TRETURN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Parámetro de retorno</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ZFIES_IMITPOSITION</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Estructura de ImItPosition para Poliza Contable</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
      <FUNCNAME>Z_TR_CAJA_OPER_DERIVE_KOSTL</FUNCNAME>
      <SHORT_TEXT>Derivar el concepto del centro de costo</SHORT_TEXT>
      <IMPORT>
@@ -394,39 +506,83 @@
      </DOCUMENTATION>
     </item>
     <item>
-     <FUNCNAME>Z_TR_CAJA_OPER_DESCOMP</FUNCNAME>
+     <FUNCNAME>Z_TR_CAJA_OPER_DESCOM</FUNCNAME>
      <REMOTE_CALL>R</REMOTE_CALL>
      <SHORT_TEXT>Rollback compensate docs</SHORT_TEXT>
      <IMPORT>
       <RSIMP>
-       <PARAMETER>AUGBL</PARAMETER>
+       <PARAMETER>CTU</PARAMETER>
+       <DBFIELD>APQI-PUTACTIVE</DBFIELD>
+       <DEFAULT>&apos;X&apos;</DEFAULT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>MODE</PARAMETER>
+       <DBFIELD>APQI-PUTACTIVE</DBFIELD>
+       <DEFAULT>&apos;N&apos;</DEFAULT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>UPDATE</PARAMETER>
+       <DBFIELD>APQI-PUTACTIVE</DBFIELD>
+       <DEFAULT>&apos;L&apos;</DEFAULT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>GROUP</PARAMETER>
+       <DBFIELD>APQI-GROUPID</DBFIELD>
+       <OPTIONAL>X</OPTIONAL>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>USER</PARAMETER>
+       <DBFIELD>APQI-USERID</DBFIELD>
+       <OPTIONAL>X</OPTIONAL>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>KEEP</PARAMETER>
+       <DBFIELD>APQI-QERASE</DBFIELD>
+       <OPTIONAL>X</OPTIONAL>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>HOLDDATE</PARAMETER>
+       <DBFIELD>APQI-STARTDATE</DBFIELD>
+       <OPTIONAL>X</OPTIONAL>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>NODATA</PARAMETER>
+       <DBFIELD>APQI-PUTACTIVE</DBFIELD>
+       <DEFAULT>&apos;/&apos;</DEFAULT>
+       <OPTIONAL>X</OPTIONAL>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>AUGBL_001</PARAMETER>
+       <DBFIELD>BDCDATA-FVAL</DBFIELD>
        <DEFAULT>&apos;100232421&apos;</DEFAULT>
-       <TYP>AUGBL</TYP>
       </RSIMP>
       <RSIMP>
-       <PARAMETER>BUKRS</PARAMETER>
+       <PARAMETER>BUKRS_002</PARAMETER>
+       <DBFIELD>BDCDATA-FVAL</DBFIELD>
        <DEFAULT>&apos;TE00&apos;</DEFAULT>
-       <TYP>BUKRS</TYP>
       </RSIMP>
       <RSIMP>
-       <PARAMETER>GJAHR</PARAMETER>
+       <PARAMETER>GJAHR_003</PARAMETER>
+       <DBFIELD>BDCDATA-FVAL</DBFIELD>
        <DEFAULT>&apos;2023&apos;</DEFAULT>
-       <TYP>GJAHR</TYP>
       </RSIMP>
       <RSIMP>
-       <PARAMETER>STGRD</PARAMETER>
+       <PARAMETER>STGRD_004</PARAMETER>
+       <DBFIELD>BDCDATA-FVAL</DBFIELD>
        <DEFAULT>&apos;01&apos;</DEFAULT>
-       <TYP>STGRD</TYP>
       </RSIMP>
       <RSIMP>
-       <PARAMETER>BUDAT</PARAMETER>
+       <PARAMETER>BUDAT_005</PARAMETER>
+       <DBFIELD>BDCDATA-FVAL</DBFIELD>
        <DEFAULT>&apos;01.11.2023&apos;</DEFAULT>
-       <TYP>ZDADES</TYP>
       </RSIMP>
       <RSIMP>
-       <PARAMETER>MONAT</PARAMETER>
+       <PARAMETER>MONAT_006</PARAMETER>
+       <DBFIELD>BDCDATA-FVAL</DBFIELD>
        <DEFAULT>&apos;11&apos;</DEFAULT>
-       <TYP>MONAT</TYP>
       </RSIMP>
      </IMPORT>
      <EXPORT>
@@ -444,34 +600,60 @@
      </TABLES>
      <DOCUMENTATION>
       <RSFDO>
-       <PARAMETER>AUGBL</PARAMETER>
+       <PARAMETER>CTU</PARAMETER>
        <KIND>P</KIND>
-       <STEXT>Número del documento de compensación</STEXT>
       </RSFDO>
       <RSFDO>
-       <PARAMETER>BUKRS</PARAMETER>
+       <PARAMETER>MODE</PARAMETER>
        <KIND>P</KIND>
-       <STEXT>Sociedad</STEXT>
       </RSFDO>
       <RSFDO>
-       <PARAMETER>GJAHR</PARAMETER>
+       <PARAMETER>UPDATE</PARAMETER>
        <KIND>P</KIND>
-       <STEXT>Ejercicio</STEXT>
       </RSFDO>
       <RSFDO>
-       <PARAMETER>STGRD</PARAMETER>
+       <PARAMETER>GROUP</PARAMETER>
        <KIND>P</KIND>
-       <STEXT>Motivo de anulación o contabilización inversa</STEXT>
       </RSFDO>
       <RSFDO>
-       <PARAMETER>BUDAT</PARAMETER>
+       <PARAMETER>USER</PARAMETER>
        <KIND>P</KIND>
-       <STEXT>Date compensate docs facto customers</STEXT>
       </RSFDO>
       <RSFDO>
-       <PARAMETER>MONAT</PARAMETER>
+       <PARAMETER>KEEP</PARAMETER>
        <KIND>P</KIND>
-       <STEXT>Mes contable</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>HOLDDATE</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>NODATA</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>AUGBL_001</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>BUKRS_002</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>GJAHR_003</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>STGRD_004</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>BUDAT_005</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>MONAT_006</PARAMETER>
+       <KIND>P</KIND>
       </RSFDO>
       <RSFDO>
        <PARAMETER>SUBRC</PARAMETER>
@@ -700,6 +882,11 @@
        <REFERENCE>X</REFERENCE>
        <TYP>BUKRS</TYP>
       </RSIMP>
+      <RSIMP>
+       <PARAMETER>PROCESS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>CHAR10</TYP>
+      </RSIMP>
      </IMPORT>
      <EXPORT>
       <RSEXP>
@@ -730,6 +917,11 @@
        <STEXT>Sociedad</STEXT>
       </RSFDO>
       <RSFDO>
+       <PARAMETER>PROCESS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Campo de texto, longitud 10</STEXT>
+      </RSFDO>
+      <RSFDO>
        <PARAMETER>HBKID</PARAMETER>
        <KIND>P</KIND>
        <STEXT>Clave breve para banco propio</STEXT>
@@ -743,6 +935,47 @@
        <PARAMETER>NOT_FOUND</PARAMETER>
        <KIND>X</KIND>
        <STEXT>NOT_FOUND</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_LAUFI_TO_HEX</FUNCNAME>
+     <SHORT_TEXT>Cambiar id hex para operar</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>INCREMENT</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>XFELD</TYP>
+      </RSIMP>
+     </IMPORT>
+     <CHANGING>
+      <RSCHA>
+       <PARAMETER>RANGO</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>STRING</TYP>
+      </RSCHA>
+     </CHANGING>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>HEXA</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>STRING</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>INCREMENT</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Casilla de selección</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>HEXA</PARAMETER>
+       <KIND>P</KIND>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>RANGO</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Rango de Propuesta de Pago</STEXT>
       </RSFDO>
      </DOCUMENTATION>
     </item>
@@ -1238,6 +1471,10 @@
        <STEXT>estructura ZESTMS_TO_PAY</STEXT>
       </RSFDO>
      </DOCUMENTATION>
+    </item>
+    <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_UNBLOCK_PROCESS</FUNCNAME>
+     <SHORT_TEXT>Bloquear proceso de trabajo</SHORT_TEXT>
     </item>
    </FUNCTIONS>
   </asx:values>

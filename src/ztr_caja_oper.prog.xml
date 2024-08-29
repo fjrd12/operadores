@@ -312,6 +312,12 @@
      <LENGTH>42</LENGTH>
     </item>
     <item>
+     <ID>I</ID>
+     <KEY>024</KEY>
+     <ENTRY>Importe</ENTRY>
+     <LENGTH>62</LENGTH>
+    </item>
+    <item>
      <ID>R</ID>
      <ENTRY>Programa ZTR_CAJA_OPER</ENTRY>
      <LENGTH>22</LENGTH>

@@ -63,7 +63,8 @@ FUNCTION z_tr_caja_oper_submit_mpay.
     WITH SELECTION-TABLE it_sels
     AND RETURN.
   ELSE.
-    MESSAGE s398(00) WITH TEXT-001 DISPLAY LIKE 'E'.
+*   Esta propuesta no fue enviada el operadores V 2.0
+    MESSAGE i012(ztr_caja_oper).
   ENDIF.
 
 ENDFUNCTION.

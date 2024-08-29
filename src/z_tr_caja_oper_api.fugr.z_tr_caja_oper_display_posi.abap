@@ -11,6 +11,13 @@ DATA: it_coper_pos TYPE TABLE OF ztr_coper_pos.
     FROM ztr_coper_pos
     WHERE uuid EQ uuid.
 
+    LOOP AT it_coper_pos INTO DATA(ls_coper_pos).
+  IF ls_coper_pos-im_kostl(1) EQ '@'.
+    CLEAR ls_coper_pos-im_kostl.
+    MODIFY it_coper_pos FROM ls_coper_pos.
+  ENDIF.
+ENDLOOP.
+
   CALL FUNCTION 'ZTR_CAJ_OPE_ALV_POP_UP_POS'
 *         EXPORTING
 *           I_START_COLUMN       = 25

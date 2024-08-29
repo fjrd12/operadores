@@ -53,6 +53,7 @@ DATA: ok_code TYPE sy-ucomm.
 DATA: it_coper_header TYPE TABLE OF zes_coper_header,
       it_coper_retry  TYPE TABLE OF ztr_coper_retry,
       it_coper_pos    TYPE TABLE OF ztr_coper_pos,
+      ls_coper_pos    TYPE ztr_coper_pos,
       ls_coper_retry  TYPE ztr_coper_retry,
       it_bapiret2     TYPE TABLE OF bapiret2,
       ls_bapiret2     TYPE bapiret2,

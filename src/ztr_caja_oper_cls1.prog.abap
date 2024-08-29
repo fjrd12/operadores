@@ -83,6 +83,7 @@ CLASS cls_alv_oo IMPLEMENTATION.
     ( fieldname   = 'IM_BUDAT' scrtext_s   = TEXT-006 scrtext_m   = TEXT-007 scrtext_l   = TEXT-007 )
     ( fieldname   = 'IM_BUKRS' ref_table = 'ZES_COPER_HEADER' ref_field = 'IM_BUKRS' )
     ( fieldname   = 'IM_BLART' ref_table = 'ZES_COPER_HEADER' ref_field = 'IM_BLART' )
+    ( fieldname   = 'SUM_IM_WRBTR' scrtext_s   = TEXT-024 scrtext_m   = TEXT-024 scrtext_l   = TEXT-024 )
     ( fieldname   = 'IM_WAERS' ref_table = 'ZES_COPER_HEADER' ref_field = 'IM_WAERS' )
     ( fieldname   = 'IM_KURSF' ref_table = 'ZES_COPER_HEADER' ref_field = 'IM_KURSF' )
     ( fieldname   = 'IM_WWERT' ref_table = 'ZES_COPER_HEADER' ref_field = 'IM_WWERT' )

@@ -4,6 +4,8 @@
 
 FORM check_registration.
 
+  DATA: sum_importe TYPE ZFIED_WRBTR.
+
   LOOP AT it_coper_header ASSIGNING <fs_coper_header>.
 
     DATA: status TYPE c LENGTH 1.
@@ -22,6 +24,21 @@ FORM check_registration.
     <fs_coper_header>-log_err_icon = log_icon.
     <fs_coper_header>-pay_prop_icon = ICON_VIEWER_OPTICAL_ARCHIVE.
     <fs_coper_header>-BANCA_OPER_ICON = v_doc_banca_oper.
+
+*   Definiendo sumatoria de las partidas
+  SELECT * INTO TABLE it_coper_pos
+    FROM ztr_coper_pos
+    WHERE uuid EQ <fs_coper_header>-uuid.
+
+  LOOP AT it_coper_pos INTO ls_coper_pos.
+    IF ls_coper_pos-im_lifnr IS NOT INITIAL.
+      sum_importe = sum_importe + ls_coper_pos-im_wrbtr.
+    ENDIF.
+  ENDLOOP.
+
+  <fs_coper_header>-sum_im_wrbtr = sum_importe.
+  CLEAR sum_importe.
+
   ENDLOOP.
 
 ENDFORM.

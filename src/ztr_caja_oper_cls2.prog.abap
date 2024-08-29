@@ -71,7 +71,8 @@ CLASS cls_events IMPLEMENTATION.
             bukrs = <fs_coper_header>-im_bukrs
             gjahr = <fs_coper_header>-im_gjahr.
         ELSE.
-          MESSAGE e006(ztr_caja_oper) DISPLAY LIKE 'I'.
+*         No se puede ir a la FB03 porque falta, documento, sociedad o ejercicio.
+          MESSAGE i006(ztr_caja_oper).
         ENDIF.
 
       WHEN 'CON_POS_ICON'.
@@ -129,11 +130,13 @@ CLASS cls_events IMPLEMENTATION.
               TABLES
                 tms_to_pay = it_tms_pay.
           ELSE.
-            MESSAGE e004(ztr_caja_oper) DISPLAY LIKE 'I'.
+*         No hay información para este documento.
+          MESSAGE i004(ztr_caja_oper).
           ENDIF.
 
         ELSE.
-          MESSAGE e005(ztr_caja_oper) DISPLAY LIKE 'I'.
+*         No hay número de documento.
+          MESSAGE i005(ztr_caja_oper).
         ENDIF.
 
       WHEN 'BANCA_OPER_ICON'.
@@ -163,11 +166,13 @@ CLASS cls_events IMPLEMENTATION.
               TABLES
                 tms_to_pay       = it_tms_pay.
           ELSE.
-            MESSAGE e004(ztr_caja_oper) DISPLAY LIKE 'I'.
+*         No hay información para este documento.
+          MESSAGE i004(ztr_caja_oper).
           ENDIF.
 
         ELSE.
-          MESSAGE e005(ztr_caja_oper) DISPLAY LIKE 'I'.
+*         No hay número de documento.
+          MESSAGE i005(ztr_caja_oper).
         ENDIF.
       WHEN OTHERS.
     ENDCASE.

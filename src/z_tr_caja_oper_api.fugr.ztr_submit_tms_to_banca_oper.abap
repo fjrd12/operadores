@@ -74,7 +74,8 @@ FUNCTION ztr_submit_tms_to_banca_oper.
     WITH SELECTION-TABLE it_sels
     AND RETURN.
   ELSE.
-    MESSAGE s398(00) WITH TEXT-001 DISPLAY LIKE 'E'.
+*   Esta propuesta no fue enviada el operadores V 2.0
+    MESSAGE i012(ztr_caja_oper).
   ENDIF.
 
 ENDFUNCTION.

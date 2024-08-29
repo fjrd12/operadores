@@ -8,7 +8,9 @@ FORM get_data .
 
   DATA: lv_reguh_l LIKE LINE OF gt_reguh_l,
         lv_reguh_o LIKE LINE OF gt_reguh_o,
-        SY_SUBRC   LIKE SY-SUBRC.
+        SY_SUBRC   LIKE SY-SUBRC,
+        rangoc     type string,
+        hexa       type string.
 
   CLEAR: lv_reguh_l, lv_reguh_o.
 
@@ -78,8 +80,18 @@ FORM get_data .
 *        INI  DVBP 10.06.2022
 *        lv_reguh_l-laufi = 'L0000'.
 
+        rangoc = gwa_socact-rango.
+        CALL FUNCTION 'Z_TR_CAJA_OPER_LAUFI_TO_HEX'
+          EXPORTING
+            INCREMENT = ''
+          IMPORTING
+            HEXA      = hexa
+          CHANGING
+            RANGO     = rangoc.
+
         CONCATENATE 'L'
-        gwa_socact-rango
+*        gwa_socact-rango
+        hexa
         INTO  lv_reguh_l-laufi.
 *        FIN DVBP 10.06.2022
         INSERT lv_reguh_l INTO TABLE gt_reguh_l.
@@ -129,7 +141,10 @@ FORM set_data .
         TPROVEEDORES      TYPE STANDARD TABLE OF  RSPARAMS,
         WPROVEEDORES      TYPE RSPARAMS,
         TLAYOUT           TYPE STANDARD TABLE OF  RSPARAMS,
-        WLAYOUT           TYPE RSPARAMS.
+        WLAYOUT           TYPE RSPARAMS,
+        HEXA              TYPE STRING,
+        rangoc            type string,
+        tipop             type char20.
 
   RANGES: r_lfd FOR reguh-laufd,
    r_lfi FOR reguh-laufi.
@@ -166,12 +181,24 @@ FORM set_data .
 
         "Indica que es la primera propuesta de pago de liquidación operadores
         IF sy-subrc NE 0.
+
+          rangoc = gwa_socact-rango.
+
+          CALL FUNCTION 'Z_TR_CAJA_OPER_LAUFI_TO_HEX'
+            EXPORTING
+              INCREMENT = ''
+            IMPORTING
+              HEXA      = HEXA
+            CHANGING
+              RANGO     = rangoc.
+
           lv_reguh_o-laufd = sy-datum.
 
 *          *        INI  DVBP 10.06.2022
 *          lv_reguh_o-laufi = 'O0000'.
           CONCATENATE 'O'
-          gwa_socact-rango
+          HEXA
+*          gwa_socact-rango
           INTO  lv_reguh_o-laufi.
 *        FIN DVBP 10.06.2022
           INSERT lv_reguh_o INTO TABLE gt_reguh_o.
@@ -202,18 +229,6 @@ FORM set_data .
             APPEND WVIAS_DE_PAGO TO TVIAS_DE_PAGO.
 
             IF LAUFI(1) = 'L'.
-*              WTIPOS_DOCUMENTOS-SELNAME = 'TDOCUMENTO'.
-*              WTIPOS_DOCUMENTOS-KIND = 'S'.
-*              WTIPOS_DOCUMENTOS-SIGN = 'I'.
-*              WTIPOS_DOCUMENTOS-OPTION = 'EQ'.
-*              WTIPOS_DOCUMENTOS-LOW = 'KL'.
-*              APPEND WTIPOS_DOCUMENTOS TO TTIPOS_DOCUMENTOS.
-*              WTIPOS_DOCUMENTOS-LOW = 'LP'.
-*              APPEND WTIPOS_DOCUMENTOS TO TTIPOS_DOCUMENTOS.
-*              WTIPOS_DOCUMENTOS-LOW = 'LT'.
-*              APPEND WTIPOS_DOCUMENTOS TO TTIPOS_DOCUMENTOS.
-*              WTIPOS_DOCUMENTOS-LOW = 'LQ'.
-*              APPEND WTIPOS_DOCUMENTOS TO TTIPOS_DOCUMENTOS.
               WLAYOUT-SELNAME = 'TLAYOUT'.
               WLAYOUT-KIND = 'S'.
               WLAYOUT-SIGN = 'I'.
@@ -229,14 +244,7 @@ FORM set_data .
               WLAYOUT-OPTION = 'EQ'.
               WLAYOUT-LOW = 'G'.
               APPEND WLAYOUT TO TLAYOUT.
-*              WTIPOS_DOCUMENTOS-SELNAME = 'TDOCUMENTO'.
-*              WTIPOS_DOCUMENTOS-KIND = 'S'.
-*              WTIPOS_DOCUMENTOS-SIGN = 'I'.
-*              WTIPOS_DOCUMENTOS-OPTION = 'EQ'.
-*              WTIPOS_DOCUMENTOS-LOW = 'KT'.
-*              APPEND WTIPOS_DOCUMENTOS TO TTIPOS_DOCUMENTOS.
-*              WTIPOS_DOCUMENTOS-LOW = 'KV'.
-*              APPEND WTIPOS_DOCUMENTOS TO TTIPOS_DOCUMENTOS.
+
             ENDIF.
 
             LOOP AT rg_vonkk.
@@ -264,10 +272,24 @@ FORM set_data .
               EXCEPTIONS
                 NOT_PROVEEDORES = 1
                 OTHERS          = 2.
+
             IF SY-SUBRC <> 0.
 * Implement suitable error handling here
             else.
-              WRITE:/ bukrs , 'Propuestas creadas', vg_laufi.
+              case vg_laufi(1).
+                when 'L'.
+                  tipop = 'Nómina'.
+                when 'P'.
+                  tipop = 'Gasto'.
+              endcase.
+
+              WRITE:/ bukrs , 'Propuesta ',tipop, ' creada:', vg_laufi.
+              case WVIAS_DE_PAGO-LOW.
+                when '8'.
+                  write: 'Santander'.
+                when '9'.
+                  write: 'Banorte'.
+              endcase.
             ENDIF.
 
           endloop.
@@ -383,7 +405,21 @@ ENDFORM.
 FORM id  USING    p_laufi TYPE laufi
                   p_vg_laufi TYPE laufi.
 
-  vg_laufi_aux = p_laufi+1(4) + 1.
+  data: RANGOC TYPE string,
+        hexa   type string.
+
+  rangoc = p_laufi+1(4).
+
+  CALL FUNCTION 'Z_TR_CAJA_OPER_LAUFI_TO_HEX'
+    EXPORTING
+      INCREMENT = 'X'
+    IMPORTING
+      HEXA      = hexa
+    CHANGING
+      RANGO     = rangoc.
+
+*  vg_laufi_aux = p_laufi+1(4) + 1.
+  vg_laufi_aux = hexa.
   CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
     EXPORTING
       input  = vg_laufi_aux

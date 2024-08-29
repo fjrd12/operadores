@@ -62,6 +62,18 @@
      <MSGNR>010</MSGNR>
      <TEXT>El banco propio no esta configurado para el banco &amp;1 de la sociedad &amp;2</TEXT>
     </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZTR_CAJA_OPER</ARBGB>
+     <MSGNR>011</MSGNR>
+     <TEXT>La posición de acreedor &amp;1 no trae el patrón @g@ o @n@</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>S</SPRSL>
+     <ARBGB>ZTR_CAJA_OPER</ARBGB>
+     <MSGNR>012</MSGNR>
+     <TEXT>Esta propuesta no fue enviada el operadores V 2.0</TEXT>
+    </T100>
    </T100>
   </asx:values>
  </asx:abap>

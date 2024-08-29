@@ -26,7 +26,8 @@ FUNCTION Z_TR_CAJA_OPER_PROPOSAL_V2.
         laufd           type laufd,
         PAR_TEX1        TYPE F110V-TEXT1 VALUE 'BSEG-XREF3',
         PAR_LIS1        TYPE F110V-LIST1,
-        PARAMETRO_COMMA TYPE STRING.
+        PARAMETRO_COMMA TYPE STRING,
+        time            type sy-tabix VALUE 1.
 
   CALL FUNCTION 'Z_TR_CAJA_OPER_MERGE_PARAMETER'
     IMPORTING
@@ -79,6 +80,8 @@ FUNCTION Z_TR_CAJA_OPER_PROPOSAL_V2.
 *        WITH par_prp3     EQ 'ZRFFOM100'    "Programa3  "Toma los programas que están ligados a la vía de pago
   AND RETURN.
 
+  wait up to time seconds.
+
   IF sy-subrc EQ 0.
     CLEAR vg_namejob.
     CONCATENATE 'F110-' sy-datum '-' vg_laufi ' -X' INTO vg_namejob.
@@ -114,6 +117,8 @@ FUNCTION Z_TR_CAJA_OPER_PROPOSAL_V2.
    WITH PAR_TEX1     EQ PAR_TEX1
    WITH PAR_LIS1     EQ PAR_LIS1
    AND RETURN.
+
+    wait up to time seconds.
 
     IF sy-subrc EQ 0.
       CONCATENATE 'F110-' sy-datum '-' vg_laufi INTO vg_namejob.
@@ -154,6 +159,8 @@ FUNCTION Z_TR_CAJA_OPER_PROPOSAL_V2.
       r_lfi-option = 'EQ'.
       r_lfi-low = laufi_ex.
       append r_lfi.
+
+      wait up to time seconds.
 
       SUBMIT sapfpaym_merge
       WITH so_lfd   IN r_lfd
