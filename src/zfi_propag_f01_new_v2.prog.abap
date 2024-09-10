@@ -144,7 +144,7 @@ FORM set_data .
         WLAYOUT           TYPE RSPARAMS,
         HEXA              TYPE STRING,
         rangoc            type string,
-        tipop             type char20.
+        tipop             type char10.
 
   RANGES: r_lfd FOR reguh-laufd,
    r_lfi FOR reguh-laufi.
@@ -279,8 +279,10 @@ FORM set_data .
               case vg_laufi(1).
                 when 'L'.
                   tipop = 'Nómina'.
-                when 'P'.
+                when 'O'.
                   tipop = 'Gasto'.
+                when OTHERS.
+                  tipop = 'Unknown'.
               endcase.
 
               WRITE:/ bukrs , 'Propuesta ',tipop, ' creada:', vg_laufi.
@@ -425,6 +427,11 @@ FORM id  USING    p_laufi TYPE laufi
       input  = vg_laufi_aux
     IMPORTING
       output = vg_laufi_aux.
+
+  if vg_laufi_aux(1) ne '0'.
+    concatenate '0' vg_laufi_aux into vg_laufi_aux.
+  endif.
+
   CONCATENATE p_laufi(1) vg_laufi_aux INTO p_vg_laufi.
 
 ENDFORM.

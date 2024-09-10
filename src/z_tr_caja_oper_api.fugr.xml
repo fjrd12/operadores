@@ -185,6 +185,55 @@
      </DOCUMENTATION>
     </item>
     <item>
+     <FUNCNAME>Z_TR_CAJA_OPER_CLONE_DOC</FUNCNAME>
+     <SHORT_TEXT>Clonar documentos contables creados por TMS</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>BUKRS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BUKRS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>BELNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BELNR_D</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>GJAHR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>GJAHR</TYP>
+      </RSIMP>
+     </IMPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>TZFIES_EX_IT_RETURN</PARAMETER>
+       <DBSTRUCT>ZFIES_EX_IT_RETURN</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>BUKRS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Sociedad</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>BELNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Número de un documento contable</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>GJAHR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Ejercicio</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>TZFIES_EX_IT_RETURN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>Estructura para Mensajes Poliza Contable</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+    <item>
      <FUNCNAME>Z_TR_CAJA_OPER_CREATE_RETRY</FUNCNAME>
      <SHORT_TEXT>Logica de retry</SHORT_TEXT>
      <IMPORT>

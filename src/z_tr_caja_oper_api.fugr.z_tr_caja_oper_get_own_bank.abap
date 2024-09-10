@@ -21,6 +21,9 @@ FUNCTION Z_TR_CAJA_OPER_GET_OWN_BANK.
 
   if sy-subrc NE 0.
     raise NOT_FOUND.
+  else.
+    hbkid = ZCOOPER_BANK-hbkid.
+    hktid = ZCOOPER_BANK-hktid.
   endif.
 
 ENDFUNCTION.

@@ -41,7 +41,6 @@ at SELECTION-SCREEN OUTPUT.
   endif.
 
 start-of-selection.
-
   CALL FUNCTION 'Z_TR_CAJA_OPER_BLOCK_PROCESS'
 * EXPORTING
 *   THRESHOLD       = 30

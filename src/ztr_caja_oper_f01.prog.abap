@@ -4,7 +4,9 @@
 
 FORM check_registration.
 
-  DATA: sum_importe TYPE ZFIED_WRBTR.
+  DATA: sum_importe TYPE ZFIED_WRBTR,
+        tbseg       TYPE STANDARD TABLE OF bseg,
+        wbseg       type bseg.
 
   LOOP AT it_coper_header ASSIGNING <fs_coper_header>.
 
@@ -25,19 +27,39 @@ FORM check_registration.
     <fs_coper_header>-pay_prop_icon = ICON_VIEWER_OPTICAL_ARCHIVE.
     <fs_coper_header>-BANCA_OPER_ICON = v_doc_banca_oper.
 
+    if <fs_coper_header>-IM_BELNR is INITIAL.
 *   Definiendo sumatoria de las partidas
-  SELECT * INTO TABLE it_coper_pos
-    FROM ztr_coper_pos
-    WHERE uuid EQ <fs_coper_header>-uuid.
+      SELECT * INTO TABLE it_coper_pos
+        FROM ztr_coper_pos
+        WHERE uuid EQ <fs_coper_header>-uuid.
 
-  LOOP AT it_coper_pos INTO ls_coper_pos.
-    IF ls_coper_pos-im_lifnr IS NOT INITIAL.
-      sum_importe = sum_importe + ls_coper_pos-im_wrbtr.
-    ENDIF.
-  ENDLOOP.
+      LOOP AT it_coper_pos INTO ls_coper_pos.
+        IF ls_coper_pos-im_lifnr IS NOT INITIAL.
+          sum_importe = sum_importe + ls_coper_pos-im_wrbtr.
+        ENDIF.
+      ENDLOOP.
 
-  <fs_coper_header>-sum_im_wrbtr = sum_importe.
-  CLEAR sum_importe.
+      <fs_coper_header>-sum_im_wrbtr = sum_importe.
+      CLEAR sum_importe.
+    else.
+
+      select * from bseg
+        where bukrs = @<fs_coper_header>-im_bukrs and
+              belnr = @<fs_coper_header>-im_belnr and
+              GJAHR = @<fs_coper_header>-im_gjahr and
+              lifnr is not INITIAL
+        into TABLE @tbseg.
+
+      loop at tbseg into wbseg.
+        if wbseg-SHKZG = 'H'.
+          sum_importe = sum_importe + wbseg-wrbtr.
+        else.
+          sum_importe = sum_importe - wbseg-wrbtr.
+        endif.
+      endloop.
+      <fs_coper_header>-sum_im_wrbtr = sum_importe.
+      CLEAR sum_importe.
+    endif.
 
   ENDLOOP.
 
